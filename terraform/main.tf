@@ -7,3 +7,11 @@ resource "aws_vpc" "main" {
     Name = "k8s-project-vpc"
   }
 }
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "k8s-project-igw"
+  }
+}
