@@ -100,3 +100,16 @@ resource "aws_security_group" "k8s_sg" {
     Name = "k8s-security-group"
   }
 }
+
+resource "aws_instance" "k8s_node" {
+  ami                         = "ami-0f918f7e67a3323f0"
+  instance_type               = "t3.micro"
+  key_name                    = "key11"
+  subnet_id                   = aws_subnet.public_subnet.id
+  vpc_security_group_ids      = [aws_security_group.k8s_sg.id]
+  associate_public_ip_address = true
+
+  tags = {
+    Name = "k8s-node"
+  }
+}
